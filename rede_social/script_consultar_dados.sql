@@ -1,23 +1,45 @@
-/*Listando dados da tabela posts*/
+/*Listar todos os dados*/
 SELECT * FROM posts;
-
-/*Listando somente colunas específicas*/
-SELECT title, description FROM posts;
-
-/*Listando informações somente do post 1*/
-SELECT * FROM posts WHERE post_id = 1;
-
-/*Listando somente o titulo do post 2*/
-SELECT title FROM posts WHERE post_id = 2;
-
-/*Listar todos os comentários*/
 SELECT * FROM comments;
 
-/*Listar o comentário com identificador = 2*/
-SELECT * FROM comments WHERE comment_id = 2;
+/*Listar todos os dados especificando colunas*/
+SELECT title, created_at FROM posts;
+SELECT comment FROM comments;
 
-/*Listar somente as colunas comentário e created_at*/
-SELECT comment, created_at FROM comments;
+/*Filtrando informações*/
+SELECT title FROM posts WHERE post_id = 5;
+SELECT comment FROM comments WHERE comment_id = 1;
 
-/*Listar somente a coluna comentário com identificador = 4*/
-SELECT comment FROM comments WHERE comment_id = 4;
+/*Consultas relacionadas + de 1 tabela*/
+
+/*
+Listar todos os posts(title) de um usuário
+junto com seu users(name)
+*/
+
+/*Forma abreviada*/
+SELECT p.title, u.name 
+    FROM posts AS p
+INNER JOIN users AS u ON u.user_id = p.user_id
+WHERE p.user_id = 1
+
+/*Forma sem abreviação*/
+SELECT posts.title, users.name 
+    FROM posts
+INNER JOIN users ON users.user_id = posts.user_id
+WHERE posts.user_id = 1
+
+/*
+Listar um post(title, description) pelo 
+seu id e seus respectivos comentários(comment)
+*/
+SELECT 
+    p.title, p.description, c.comment
+FROM posts p
+JOIN comments c ON c.post_id = p.post_id
+WHERE p.post_id = 1;
+
+/*
+Listar o usuario(name) pelo seu id,
+seus posts e comentários dos posts
+*/
