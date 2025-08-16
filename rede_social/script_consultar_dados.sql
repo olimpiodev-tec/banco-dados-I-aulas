@@ -43,3 +43,9 @@ WHERE p.post_id = 1;
 Listar o usuario(name) pelo seu id,
 seus posts e comentários dos posts
 */
+SELECT 
+    u.name, p.title, c.comment
+FROM users AS u
+INNER JOIN posts AS p ON p.user_id = u.user_id
+INNER JOIN comments AS c ON c.post_id = p.post_id
+WHERE u.user_id = 1
